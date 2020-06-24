@@ -2,19 +2,26 @@
 
   class LoginModel extends Model {
     
-    public function verifyLogin($username,$password) {
-      $data = $this->getData($username)[0] ;
-      if (!$data) {
-        #echo "User not Found" ;
+    public function verifyLogin($data) {
+      
+      $fields = ["PassWord", "FirstName", "SecondName"] ;
+      $wdata = [ "UserName" => $data["UserName"]] ;
+      
+      $dataFromDB = $this->database->select("User", $fields, $wdata, "UserName")->fetchAll(PDO::FETCH_ASSOC)[0] ;
+      
+      if (!$dataFromDB) {
+        
         return "Not Found";
       }
-      $realPassword = $data["password"] ;
-      if (!password_verify($password, $realPassword)) {
+      
+      $realPassword = $dataFromDB["PassWord"] ;
+      
+      if (!password_verify($data["PassWord"], $realPassword)) {
         #echo "Wrong Password" ;
         return "Wrong";
       }
       #echo "You are logged in " ;
-      return $data["firstname"]." ".$data["secondname"] ;
+      return $dataFromDB["FirstName"]." ".$dataFromDB["SecondName"] ;
     }
     
     public function getData($username) {
@@ -24,9 +31,5 @@
       return $stmt->fetchAll(PDO::FETCH_ASSOC) ;
     }
     
-    public function sel($a,$b,$c,$d) {
-      
-      return $this->database->select($a,$b,$c,$d) ;
-    }
     
   }

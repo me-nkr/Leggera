@@ -8,33 +8,30 @@
     }
     
     public function login() {
+      
       if (!isset($_POST["submitLogin"])){
         return header("Location: ".MAIN."login") ;
       }
-      $username = $_POST["username"] ;
-      $password = $_POST["password"] ;
+      
+      $data = ["UserName" => $_POST["username"], "PassWord" => $_POST["password"]] ;
       
       $this->loadModel("login") ;
       
-      $result = $this->model->verifyLogin($username,$password) ;
+      $result = $this->model->verifyLogin($data) ;
       
       
       switch ($result) {
         case "Not Found":
-          session_start() ;
-          $_SESSION["errorlog"] = "User Not Found" ;
-          header("Location: login") ;
+          return $this->errorLog("User Not Found" , "login") ;
           break;
           
         case "Wrong":
-          session_start() ;
-          $_SESSION["errorlog"] = "Wrong Password" ;
-          header("Location: login") ;
+          return $this->errorLog("Wrong Password" , "login") ;
           break;
         
         default:
           session_start() ;
-          $_SESSION["user"] = $username ;
+          $_SESSION["user"] = $data["UserName"] ;
           $_SESSION["name"] = $result ;
           header("Location: ".MAIN."index") ;
           break;
@@ -48,10 +45,4 @@
       header("Location: ".MAIN."index") ;
     }
     
-    public function test() {
-      
-      $this->loadModel("login") ;
-      
-      print_r($this->model->sel("User", ["ID", "UserName"],["FirstName" => "Naveen", "SecondName" => "K R"],"FirstName AND SecondName")) ;
-    }
   }

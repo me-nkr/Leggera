@@ -94,7 +94,7 @@
       
       if ($this->runQuery($sql,$pwdata)) {
         
-        return $this->runQuery($sql,$pwdata)->fetchAll(PDO::FETCH_ASSOC) ;
+        return $this->runQuery($sql,$pwdata) ;
         
       }
       else {

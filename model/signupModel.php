@@ -17,10 +17,13 @@
     }
     
     public function userExists($username) {
-      $sql = "SELECT COUNT(DISTINCT(ID)) FROM User WHERE UserName = ? ;" ;
-      $stmt = $this->database->prepare($sql) ;
-      $stmt->execute([$username]) ;
-      $users = $stmt->fetchColumn() ;
+      
+      $fields = ["COUNT(DISTINCT(ID))"] ;
+      $wdata = ["UserName" => $username] ;
+      
+      $dba = $this->database->select("User", $fields, $wdata, "UserName") ;
+      
+      $users = $dba->fetchColumn() ;
       if (!$users) {
         return false ;
       }
