@@ -1,0 +1,14 @@
+#to disallow directory indexing
+Options -Indexes 
+#to set index.php as default index page
+DirectoryIndex index.php
+
+
+#Rewrite engine :
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

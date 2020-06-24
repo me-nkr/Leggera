@@ -1,0 +1,35 @@
+.main{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signup{
+  display: flex;
+  background-color: black;
+  border-radius: 30px;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+}
+.signup input{
+  background-color: silver;
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+}
+.signup button{
+  padding: 5px;
+  width: 50%;
+  background-color: aqua;
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+.errorlog{
+  color: red;
+  padding: 10px;
+  margin: 5px;
+}
