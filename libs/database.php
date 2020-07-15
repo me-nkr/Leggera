@@ -35,9 +35,10 @@
         $errorInfo = "SQLSTATE :($errorData[0]), Error Code :($errorData[1]), Error Message :($errorData[2])" ;
         
         $errorDetails = "[$errorDate] [$errorInfo]\n" ;
-        $error = fopen($this->ERR_LOG, "a") ;
-        fwrite($error, $errorDetails) ;
-        fclose($error) ;
+        $errorFile = fopen($this->ERR_LOG, "a") ;
+        fwrite($errorFile, $errorDetails) ;
+        fclose($errorFile
+        ) ;
         
         return false ;
       }
@@ -82,19 +83,25 @@
       }
     }
     
-    public function select($tableName, $columnNames, $wdata, $wquery) {
+    /**
+    * @param string $tableName : name of table to insert data
+    * @param array $columnNames : array of column/field names. Make sure array keys of every value is same as database column name.
+    * @param associative array $whereData : array of data for WHERE part of the query. Make sure array keys of every value is same as database column name.
+    * @param string $whereQuery : the where part of the query. Just use the field names, as in the databse.
+    */
+    public function select($tableName, $columnNames, $whereData, $whereQuery) {
       
-      $pwdata = $this->wdata($wdata) ;
+      $dataToSubmit = $this->whereDataConvert($whereData) ;
       
-      $wquery = $this->wqstr($pwdata, $wquery) ;
+      $whereQuery = $this->whereQueryConvert($dataToSubmit, $whereQuery) ;
       
       $columnNames = implode(", ", $columnNames) ;
       
-      $sql = "SELECT $columnNames FROM $tableName WHERE $wquery ;" ;
+      $sql = "SELECT $columnNames FROM $tableName WHERE $whereQuery ;" ;
       
-      if ($this->runQuery($sql,$pwdata)) {
+      if ($this->runQuery($sql,$dataToSubmit)) {
         
-        return $this->runQuery($sql,$pwdata) ;
+        return $this->runQuery($sql,$dataToSubmit) ;
         
       }
       else {
@@ -105,22 +112,22 @@
       
     }
     
-    public function wdata($data) {
+    public function whereDataConvert($data) {
     
       foreach ($data as $key => $value) {
-        $pwdata[":$key"] = $value ;
+        $convertedData[":$key"] = $value ;
       }
-      return $pwdata ;
+      return $convertedData ;
     }
   
-    public function wqstr($data, $wqstr) {
+    public function whereQueryConvert($data, $wqstr) {
     
       foreach ($data as $key => $value) {
       
-        $fname = ltrim($key, ":") ;
-        $cond = "$fname = $key" ;
-        //echo $cond."<br/>" ;
-        $wqstr = preg_replace("/$fname/", $cond, $wqstr) ;
+        $fieldName = ltrim($key, ":") ;
+        $cond = "$fieldName = $key" ;
+        
+        $wqstr = preg_replace("/$fieldName/", $cond, $wqstr) ;
       }
       
       return $wqstr ;
