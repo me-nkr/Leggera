@@ -51,7 +51,7 @@
     */
     public function insert($tableName, $data) {
       
-      //creating modified array with keys having ":new" in front to keep them as placeholders, from $data.
+      //creating modified array with keys having ":new" in front to keep them as placeholders, from $data. (the ":new" can be replaced with ":" as it makes no significant difference here)
       foreach ($data as $key => $value) {
         
         $dataToSubmit[":new$key"] = $value ;
@@ -112,6 +112,51 @@
       
     }
     
+    /**
+    * @param string $tableName : name of table to insert data
+    * @param associative array $data : array of updated data. make sure array keys of every value is same as database column name.
+    * @param associative array $whereData : array of data for WHERE part of the query. Make sure array keys of every value is same as database column name.
+    * @param string $whereQuery : the where part of the query. Just use the field names, as in the databse.
+    */
+    public function update($tableName, $data, $whereData, $whereQuery) {
+      
+      //creating modified array with keys having ":new" in front to keep them as placeholders, from $data. It is neccessary to put ":new" in front of the updated data to avoid clash with whereData.
+      foreach ($data as $key => $value) {
+        
+        $updatedData[":new$key"] = $value ;
+        
+      }
+      
+      foreach ($updatedData as $key => $value) {
+      
+      //placeholders for the SET part of UPDATE sql query
+      $queryString .= preg_replace("/^:new/","",$key)." = ".$key.", " ;
+        
+      }
+      
+      $queryString = rtrim($queryString, ", ") ;
+      
+      $whereData = $this->whereDataConvert($whereData) ;
+
+      $whereQuery = $this->whereQueryConvert($whereData, $whereQuery) ;
+      
+      $dataToSubmit = array_merge($updatedData, $whereData) ;
+      
+      $sql = "UPDATE $tableName SET $queryString WHERE $whereQuery" ;
+      
+      if ($this->runQuery($sql, $dataToSubmit)) {
+        
+        return true ;
+        
+      }
+      else {
+        
+        return false ;
+        
+      }
+      
+    }
+    
     public function whereDataConvert($data) {
     
       foreach ($data as $key => $value) {
@@ -120,16 +165,16 @@
       return $convertedData ;
     }
   
-    public function whereQueryConvert($data, $wqstr) {
+    public function whereQueryConvert($data, $whereQueryString) {
     
       foreach ($data as $key => $value) {
       
-        $fieldName = ltrim($key, ":") ;
-        $cond = "$fieldName = $key" ;
+        $ColumnName = ltrim($key, ":") ;
+        $conditionStatement = "$ColumnName = $key" ;
         
-        $wqstr = preg_replace("/$fieldName/", $cond, $wqstr) ;
+        $whereQueryString = preg_replace("/$ColumnName/", $conditionStatement, $whereQueryString) ;
       }
       
-      return $wqstr ;
+      return $whereQueryString ;
     }
   }
