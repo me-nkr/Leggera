@@ -8,3 +8,8 @@
 [Monday 22/06/20 09:30:22] [SQLSTATE :(42000), Error Code :(1064), Error Message :(You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':FirstName OR SecondName = :SecondName' at line 1)]
 [Monday 22/06/20 09:30:24] [SQLSTATE :(42000), Error Code :(1064), Error Message :(You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':FirstName OR SecondName = :SecondName' at line 1)]
 [Monday 22/06/20 09:33:25] [SQLSTATE :(42S02), Error Code :(1146), Error Message :(Table 'signin.Uer' doesn't exist)]
+[Monday 20/07/20 10:36:20] [SQLSTATE :(42S02), Error Code :(1146), Error Message :(Table 'signin.a' doesn't exist)]
+[Monday 20/07/20 10:37:18] [SQLSTATE :(42S02), Error Code :(1146), Error Message :(Table 'signin.a' doesn't exist)]
+[Monday 20/07/20 10:37:21] [SQLSTATE :(42S02), Error Code :(1146), Error Message :(Table 'signin.a' doesn't exist)]
+[Monday 20/07/20 10:40:09] [SQLSTATE :(42S02), Error Code :(1146), Error Message :(Table 'signin.a' doesn't exist)]
+[Monday 20/07/20 10:40:47] [SQLSTATE :(42S02), Error Code :(1146), Error Message :(Table 'signin.a' doesn't exist)]
