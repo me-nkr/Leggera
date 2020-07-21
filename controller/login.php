@@ -45,15 +45,4 @@
       header("Location: ".MAIN."index") ;
     }
     
-    public function test() {
-      
-      $this->loadModel("login") ;
-      if ($this->model->database->update("User",["UserName" => "naveen","FirstName"=> "test","SecondName" => "just"],["ID" => "41"],"ID") ) {
-        echo "success" ;
-      }
-      else {
-        echo "failed" ;
-      }
-      
-    }
   }

@@ -142,7 +142,7 @@
       
       $dataToSubmit = array_merge($updatedData, $whereData) ;
       
-      $sql = "UPDATE $tableName SET $queryString WHERE $whereQuery" ;
+      $sql = "UPDATE $tableName SET $queryString WHERE $whereQuery ;" ;
       
       if ($this->runQuery($sql, $dataToSubmit)) {
         
@@ -152,6 +152,33 @@
       else {
         
         return false ;
+        
+      }
+      
+    }
+    
+    
+    /**
+    * @param string $tableName : name of table to insert data
+    * @param associative array $whereData : array of data for WHERE part of the query. Make sure array keys of every value is same as database column name.
+    * @param string $whereQuery : the where part of the query. Just use the field names, as in the databse.
+    */
+    public function clear($tableName, $whereData, $whereQuery) {
+      
+      $dataToSubmit = $this->whereDataConvert($whereData) ;
+
+      $whereQuery = $this->whereQueryConvert($dataToSubmit, $whereQuery) ;
+      
+      $sql = "DELETE FROM $tableName WHERE $whereQuery ;" ;
+      
+      if ($this->runQuery($sql, $dataToSubmit)) {
+        
+        return "true" ;
+        
+      }
+      else {
+        
+        return "false" ;
         
       }
       
