@@ -8,8 +8,11 @@
 </form>
 <div class="errorlog">
   <?php
-    echo $_SESSION["errorlog"] ;
-    session_unset() ;
-    session_destroy() ;
+    if (isset($_SESSION["errorlog"])) {
+      
+      echo $_SESSION["errorlog"] ;
+      session_unset() ;
+      session_destroy() ;
+    }
   ?>
 </div>
