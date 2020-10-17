@@ -5,7 +5,7 @@
   */
   define("DBTYPE", "mysql") ;
   define("DBSERVER", "localhost") ;
-  define("DBNAME", "signin") ;
+  define("DBNAME", "mvc") ;
   define("DBUSER", "developer") ;
   define("DBPASS", "#Developdb0") ;
   
