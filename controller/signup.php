@@ -2,12 +2,8 @@
   
   class Signup extends Controller {
     
-    public function __construct() {
-      parent::__construct() ;
-      #echo "Index Page" ;
-    }
     
-    public function signup() {
+    public function adduser() {
       
       if (!isset($_POST["submitSignup"])){
         

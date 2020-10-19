@@ -2,12 +2,8 @@
   
   class Login extends Controller {
     
-    public function __construct() {
-      parent::__construct() ;
-      #echo "Index Page" ;
-    }
     
-    public function login() {
+    public function authenticate() {
       
       if (!isset($_POST["submitLogin"])){
         return header("Location: ".MAIN."login") ;

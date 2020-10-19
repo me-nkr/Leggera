@@ -1,4 +1,4 @@
-<form class="signup" action="signup/signup" method="post" accept-charset="utf-8">
+<form class="signup" action="signup/adduser" method="post" accept-charset="utf-8">
   <input type="text" name="firstname" id="firstname" value="" placeholder="First name"/>
   <input type="text" name="secondname" id="secondname" value="" placeholder="Second name"/>
   <input type="text" name="username" id="username" value="" placeholder="Username"/>

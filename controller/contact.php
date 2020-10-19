@@ -2,10 +2,6 @@
   
   class Contact extends Controller {
     
-    public function __construct() {
-      parent::__construct() ;
-      #echo "Index Page" ;
-    }
     
     public function test() {
       $form = new Form() ;
