@@ -4,10 +4,14 @@
   
   class Form {
     
-    public $_postData = [] ;
-    public $_currentField = null ;
-    public $_validator = null ;
-    public $_error = [] ;
+    private $_postData = [] ;
+
+    private $_currentField = null ;
+
+    private $_validator = null ;
+
+    private $_error = [] ;
+    
     
     public function __construct() {
       
@@ -83,6 +87,7 @@
         }
 
         $errorString = rtrim($errorString, "</br>") ;
+        
         return $errorString ;
         
       }

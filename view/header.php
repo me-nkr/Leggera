@@ -1,4 +1,5 @@
 <?php session_start() ; ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,10 +14,13 @@
       <h1>MVC Project</h1> <br />
       <a href=<?php echo MAIN."index" ; ?> >Home</a>
       <?php
+
         if (!isset($_SESSION["user"])){
+
           echo '<a href='.MAIN.'login>Login</a>' ;
         }
         else{
+          
           echo '<a href='.MAIN.'login/logout>Logout</a>' ;
         }
       ?>

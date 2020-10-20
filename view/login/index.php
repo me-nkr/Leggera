@@ -5,10 +5,13 @@
 </form>
 <div class="errorlog">
   <?php
+
     if (isset($_SESSION["errorlog"])) {
       
       echo $_SESSION["errorlog"] ;
+
       session_unset() ;
+      
       session_destroy() ;
     }
   ?>
