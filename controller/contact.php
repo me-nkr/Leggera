@@ -24,10 +24,12 @@
       if ($result) {
 
         return $this->errorLog($result, MAIN."contact") ;
+        exit;
       }
       else {
 
         header("Location: ".MAIN."contact") ;
+        exit;
 
       }
       

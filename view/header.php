@@ -1,4 +1,9 @@
-<?php session_start() ; ?>
+<?php 
+  if (session_status() == PHP_SESSION_NONE) {
+    
+      session_start();
+  }
+ ?>
 
 <!DOCTYPE html>
 <html>
@@ -25,5 +30,23 @@
         }
       ?>
       <a href=<?php echo MAIN."signup" ; ?>>Signup</a>
+      <form method="post" action="login" accept-charset="utf-8">
+        <input type="text" name="username" id="">
+        <input type="password" name="password" id="">
+        <button type="submit" name="submitLogin">Submit</button>
+      </form>
+      <div class="errorlog">
+  <?php
+
+    if (isset($_SESSION["errorlog"])) {
+      
+      echo $_SESSION["errorlog"] ;
+
+      session_unset() ;
+      
+      session_destroy() ;
+    }
+  ?>
+</div>
     </header>
     <div class="main">

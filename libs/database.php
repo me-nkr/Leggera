@@ -61,7 +61,7 @@
     * @param string $tableName : name of table to insert data
     * @param associative array $data : array of data to insert. make sure array keys of every value is same as database column name.
     */
-    protected function insert($tableName, $data) {
+    public function insert($tableName, $data) {
       
       //creating modified array with keys having ":new" in front to keep them as placeholders, from $data. (the ":new" can be replaced with ":" as it makes no significant difference here)
       foreach ($data as $key => $value) {
@@ -103,7 +103,7 @@
     * @param associative array $whereData : array of data for WHERE part of the query. Make sure array keys of every value is same as database column name.
     * @param string $whereQuery : the where part of the query. Just use the field names, as in the databse.
     */
-    protected function select($tableName, $columnNames, $whereData, $whereQuery) {
+    public function select($tableName, $columnNames, $whereData, $whereQuery) {
       
       $dataToSubmit = $this->whereDataConvert($whereData) ;
       
@@ -132,7 +132,7 @@
     * @param associative array $whereData : array of data for WHERE part of the query. Make sure array keys of every value is same as database column name.
     * @param string $whereQuery : the where part of the query. Just use the field names, as in the databse.
     */
-    protected function update($tableName, $data, $whereData, $whereQuery) {
+    public function update($tableName, $data, $whereData, $whereQuery) {
       
       //creating modified array with keys having ":new" in front to keep them as placeholders, from $data. It is neccessary to put ":new" in front of the updated data to avoid clash with whereData.
       foreach ($data as $key => $value) {
@@ -177,7 +177,7 @@
     * @param associative array $whereData : array of data for WHERE part of the query. Make sure array keys of every value is same as database column name.
     * @param string $whereQuery : the where part of the query. Just use the field names, as in the databse.
     */
-    protected function clear($tableName, $whereData, $whereQuery) {
+    public function clear($tableName, $whereData, $whereQuery) {
       
       $dataToSubmit = $this->whereDataConvert($whereData) ;
 

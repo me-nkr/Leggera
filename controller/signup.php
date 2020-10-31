@@ -2,12 +2,17 @@
   
   class Signup extends Controller {
     
-    
-    public function adduser() {
+    public function __construct() {
+
+      $this->indexView("signup") ;
+    }
+
+    public function signup() {
       
       if (!isset($_POST["submitSignup"])){
         
         return header("Location: ".MAIN."signup") ;
+        exit;
       }
       
        $data = [
@@ -23,17 +28,20 @@
       if($this->model->userExists($data["UserName"])) {
         
         return $this->errorLog("Username Taken", "signup") ;
+        exit;
         
       }
       
       if ($this->model->setData($data)) {
         
         return header("Location: ".MAIN."login") ;
+        exit;
         
       }
       else {
         
         return $this->errorLog("Server Error Please Try Again After Some Time", "signup") ;
+        exit;
         
       }
     }

@@ -3,10 +3,10 @@
   class Login extends Controller {
     
     
-    public function authenticate() {
+    public function __construct() {
       
       if (!isset($_POST["submitLogin"])){
-        return header("Location: ".MAIN."login") ;
+        return header("Location: ".$_SERVER['HTTP_REFERER']) ;
       }
       
       $data = ["UserName" => $_POST["username"], "PassWord" => $_POST["password"]] ;
@@ -18,19 +18,19 @@
       
       switch ($result) {
         case "Not Found":
-          return $this->errorLog("User Not Found" , "login") ;
-          break;
+          return $this->errorLog("User Not Found" , $_SERVER['HTTP_REFERER']) ;
+          exit;
           
         case "Wrong":
-          return $this->errorLog("Wrong Password" , "login") ;
-          break;
+          return $this->errorLog("Wrong Password" , $_SERVER['HTTP_REFERER']) ;
+          exit;
         
         default:
           session_start() ;
           $_SESSION["user"] = $data["UserName"] ;
           $_SESSION["name"] = $result ;
           header("Location: ".MAIN."index") ;
-          break;
+          exit;
       }
     }
     
@@ -39,6 +39,7 @@
       session_unset() ;
       session_destroy() ;
       header("Location: ".MAIN."index") ;
+      exit;
     }
     
   }
