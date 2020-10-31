@@ -27,7 +27,7 @@
       
       if($this->model->userExists($data["UserName"])) {
         
-        return $this->errorLog("Username Taken", "signup") ;
+        return $this->errorLog("Username Taken", MAIN."signup") ;
         exit;
         
       }

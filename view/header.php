@@ -20,16 +20,13 @@
       <a href=<?php echo MAIN."index" ; ?> >Home</a>
       <?php
 
-        if (!isset($_SESSION["user"])){
+        if (isset($_SESSION["user"])){
 
-          echo '<a href='.MAIN.'login>Login</a>' ;
-        }
-        else{
-          
-          echo '<a href='.MAIN.'login/logout>Logout</a>' ;
+          echo '<a href='.MAIN.'login/logout>Logout</a>' ;       
         }
       ?>
       <a href=<?php echo MAIN."signup" ; ?>>Signup</a>
+      <a href=<?php echo MAIN."contact" ; ?>>Contact</a>
       <form method="post" action="login" accept-charset="utf-8">
         <input type="text" name="username" id="">
         <input type="password" name="password" id="">
