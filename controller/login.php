@@ -9,29 +9,45 @@
         return header("Location: ".$_SERVER['HTTP_REFERER']) ;
       }
       
-      $data = ["UserName" => $_POST["username"], "PassWord" => $_POST["password"]] ;
-      
-      $this->loadModel("login") ;
-      
-      $result = $this->model->verifyLogin($data) ;
-      
-      
-      switch ($result) {
-        case "Not Found":
-          return $this->errorLog("User Not Found" , $_SERVER['HTTP_REFERER']) ;
-          exit;
-          
-        case "Wrong":
-          return $this->errorLog("Wrong Password" , $_SERVER['HTTP_REFERER']) ;
-          exit;
-        
-        default:
-          session_start() ;
-          $_SESSION["user"] = $data["UserName"] ;
-          $_SESSION["name"] = $result ;
-          header("Location: ".MAIN."index") ;
-          exit;
+      $form = new Form() ;
+
+      $form ->post("UserName")
+            ->validate("isEmpty")
+            ->post("PassWord")
+            ->validate("isEmpty") ;
+
+      $errors = $form->submit() ;
+
+      if ($errors) {
+
+        return $this->errorLog($errors, $_SERVER['HTTP_REFERER']) ;
+        exit;
       }
+      else {
+
+        $this->loadModel("login") ;
+      
+        $result = $this->model->verifyLogin($form->fetch()) ;
+        
+        
+        switch ($result) {
+          case "Not Found":
+            return $this->errorLog("User Not Found" , $_SERVER['HTTP_REFERER']) ;
+            exit;
+            
+          case "Wrong":
+            return $this->errorLog("Wrong Password" , $_SERVER['HTTP_REFERER']) ;
+            exit;
+          
+          default:
+            session_start() ;
+            $_SESSION["user"] = $form->fetch(["UserName"]) ;
+            $_SESSION["name"] = $result ;
+            header("Location: ".MAIN."index") ;
+            exit;
+      }
+      }
+
     }
     
     public function logout() {

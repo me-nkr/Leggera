@@ -15,34 +15,53 @@
         exit;
       }
       
-       $data = [
-         "UserName" => $_POST["username"],
-         "FirstName" => $_POST["firstname"],
-         "SecondName" => $_POST["secondname"],
-         "Email" => $_POST["mail"],
-         "PassWord" => password_hash($_POST["password"],PASSWORD_DEFAULT)
-       ] ;
-      
-      $this->loadModel("signup") ;
-      
-      if($this->model->userExists($data["UserName"])) {
-        
-        return $this->errorLog("Username Taken", MAIN."signup") ;
+      $form = new Form() ;
+
+      $form ->post("FirstName")
+            ->validate("isEmpty")
+            ->post("SecondName")
+            ->validate("isEmpty")
+            ->post("UserName")
+            ->validate("isEmpty")
+            ->post("Email")
+            ->validate("isEmpty")
+            ->validate("validEmail")
+            ->post("PassWord")
+            ->validate("isEmpty")
+            ->encrypt(PASSWORD_DEFAULT) ;
+
+      $errors = $form->submit() ;
+
+      if ($errors) {
+
+        return $this->errorLog($errors, MAIN."signup") ;
         exit;
-        
-      }
-      
-      if ($this->model->setData($data)) {
-        
-        return header("Location: ".MAIN."login") ;
-        exit;
-        
       }
       else {
+
+        $this->loadModel("signup") ;
+      
+        if($this->model->userExists($form->fetch("UserName"))) {
+          
+          return $this->errorLog("Username Taken", MAIN."signup") ;
+          exit;
+          
+        }
         
-        return $this->errorLog("Server Error Please Try Again After Some Time", "signup") ;
-        exit;
-        
+        if ($this->model->setData($form->fetch())) {
+          
+          return header("Location: ".MAIN."signup") ;
+          exit;
+          
+        }
+        else {
+          
+          return $this->errorLog("Server Error Please Try Again After Some Time", "signup") ;
+          exit;
+          
+        }
       }
+      
+      
     }
   }

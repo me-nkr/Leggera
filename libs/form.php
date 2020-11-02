@@ -47,6 +47,13 @@
         
       }
     }
+
+    public function encrypt($encryptionType) {
+
+      $this->_postData[$this->_currentField] = password_hash($this->_postData[$this->_currentField], $encryptionType) ;
+      
+      return $this;
+    }
     
     public function validate($typeOfValidation, $arg = null) {
       

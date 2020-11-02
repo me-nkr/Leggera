@@ -17,13 +17,11 @@
             ->post("msg")
             ->validate("minLen", 5) ;
 
-      
-      
-      $result = $form->submit() ;
+      $errors = $form->submit() ;     
 
-      if ($result) {
+      if ($errors) {
 
-        return $this->errorLog($result, MAIN."contact") ;
+        return $this->errorLog($errors, MAIN."contact") ;
         exit;
       }
       else {

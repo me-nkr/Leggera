@@ -28,8 +28,8 @@
       <a href=<?php echo MAIN."signup" ; ?>>Signup</a>
       <a href=<?php echo MAIN."contact" ; ?>>Contact</a>
       <form method="post" action="login" accept-charset="utf-8">
-        <input type="text" name="username" id="">
-        <input type="password" name="password" id="">
+        <input type="text" name="UserName" id="">
+        <input type="password" name="PassWord" id="">
         <button type="submit" name="submitLogin">Submit</button>
       </form>
       <div class="errorlog">
