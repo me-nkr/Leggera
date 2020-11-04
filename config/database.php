@@ -4,10 +4,10 @@
    * edit this to configure your database.
   */
   define("DBTYPE", "mysql") ;
-  define("DBSERVER", "localhost") ;
-  define("DBNAME", "mvc") ;
-  define("DBUSER", "developer") ;
-  define("DBPASS", "#Developdb0") ;
+  define("DBSERVER", "__DATABASE_SERVERNAME__") ;
+  define("DBNAME", "__DATABASE_NAME__") ;
+  define("DBUSER", "__dATABASE_USERNAME__") ;
+  define("DBPASS", "__DATABASE_PASSWORD__") ;
   
   
   /**
