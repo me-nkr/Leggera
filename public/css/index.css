@@ -1,0 +1,40 @@
+.grid{
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-areas:
+        ". ."
+        "welcome welcome"
+        "note note "
+        "docs tuts"
+        ". ." 
+        ;
+    align-items: center;
+    font-size: 200%;
+    color: #4a2619;
+    background-color: #cbbdad;
+}
+.grid a{
+    text-decoration: none;
+    color: #4a2619;
+}
+.welcome{
+    grid-area: welcome;
+    justify-content: space-around;
+    text-align: center;
+}
+.note{
+    grid-area: note;
+    justify-content: space-around;
+    text-align: center;
+}
+.docs{
+    grid-area: docs;
+    justify-content: space-around;
+    text-align: center;
+}
+.tuts{
+    grid-area: tuts;
+    justify-content: space-around;
+    text-align: center; 
+} 

@@ -1,7 +1,7 @@
 *{
   margin: 0px;
   padding: 0px;
-  box-sizing: boeder-box;
+  box-sizing: border-box;
 }
 body{
   display: flex;
@@ -9,19 +9,23 @@ body{
   min-height: 100vh;
 }
 .header{
-  background-color: black;
-  color: white;
+  background-color: #302621;
+  color: #984f0e;
   text-align: center;
   padding: 10px;
 }
 .header a{
   text-decoration: none;
-  color: white;
+  color: #984f0e;
 }
 .footer{
-  background-color: black;
-  color: white;
+  background-color: #302621;
+  color: #984f0e;
   text-align: center;
   padding: 10px;
   margin-top: auto;
+}
+.footer a{
+  text-decoration: none;
+  color: #984f0e;
 }

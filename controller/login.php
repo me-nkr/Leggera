@@ -6,7 +6,9 @@
     public function __construct() {
       
       if (!isset($_POST["submitLogin"])){
-        return header("Location: ".$_SERVER['HTTP_REFERER']) ;
+
+        return header("Location: ".MAIN."index") ;
+        exit;
       }
       
       $form = new Form() ;
@@ -20,7 +22,7 @@
 
       if ($errors) {
 
-        return $this->errorLog($errors, $_SERVER['HTTP_REFERER']) ;
+        return $this->errorLog($errors, MAIN."index") ;
         exit;
       }
       else {
@@ -32,11 +34,11 @@
         
         switch ($result) {
           case "Not Found":
-            return $this->errorLog("User Not Found" , $_SERVER['HTTP_REFERER']) ;
+            return $this->errorLog("User Not Found" , MAIN."index") ;
             exit;
             
           case "Wrong":
-            return $this->errorLog("Wrong Password" , $_SERVER['HTTP_REFERER']) ;
+            return $this->errorLog("Wrong Password" , MAIN."index") ;
             exit;
           
           default:

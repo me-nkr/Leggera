@@ -1,6 +1,6 @@
   </div>
   <footer class="footer">
-    &copy; mvc Signin.
+    <a href="http://">Leggera</a>
   </footer>
 </body>
 </html>
